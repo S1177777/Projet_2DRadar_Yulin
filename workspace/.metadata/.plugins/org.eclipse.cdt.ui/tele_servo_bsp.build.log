@@ -1,0 +1,6 @@
+16:29:36 **** Clean-only build of configuration Nios II for project tele_servo_bsp ****
+make clean 
+[BSP clean complete]
+
+16:29:36 Build Finished (took 229ms)
+

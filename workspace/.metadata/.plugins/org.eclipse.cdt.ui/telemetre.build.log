@@ -1,0 +1,9 @@
+16:26:07 **** Incremental Build of configuration Nios II for project telemetre ****
+make all 
+Info: Building ../telemetre_bsp/
+D:/Quartus/quartus/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../telemetre_bsp/
+[BSP build complete]
+[telemetre build complete]
+
+16:26:07 Build Finished (took 769ms)
+

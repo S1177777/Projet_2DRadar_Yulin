@@ -1,0 +1,113 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "trig",
+					"strict" : false
+				},
+				{
+					"name" : "Dist_cm[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Dist_cm[1]",
+					"strict" : false
+				},
+				{
+					"name" : "Dist_cm[2]",
+					"strict" : false
+				},
+				{
+					"name" : "Dist_cm[3]",
+					"strict" : false
+				},
+				{
+					"name" : "Dist_cm[4]",
+					"strict" : false
+				},
+				{
+					"name" : "Dist_cm[5]",
+					"strict" : false
+				},
+				{
+					"name" : "Dist_cm[6]",
+					"strict" : false
+				},
+				{
+					"name" : "Dist_cm[7]",
+					"strict" : false
+				},
+				{
+					"name" : "Dist_cm[8]",
+					"strict" : false
+				},
+				{
+					"name" : "Dist_cm[9]",
+					"strict" : false
+				},
+				{
+					"name" : "readdata[0]",
+					"strict" : false
+				},
+				{
+					"name" : "readdata[1]",
+					"strict" : false
+				},
+				{
+					"name" : "readdata[2]",
+					"strict" : false
+				},
+				{
+					"name" : "readdata[3]",
+					"strict" : false
+				},
+				{
+					"name" : "readdata[4]",
+					"strict" : false
+				},
+				{
+					"name" : "readdata[5]",
+					"strict" : false
+				},
+				{
+					"name" : "readdata[6]",
+					"strict" : false
+				},
+				{
+					"name" : "readdata[7]",
+					"strict" : false
+				},
+				{
+					"name" : "readdata[8]",
+					"strict" : false
+				},
+				{
+					"name" : "readdata[9]",
+					"strict" : false
+				},
+				{
+					"name" : "chipselect",
+					"strict" : false
+				},
+				{
+					"name" : "Read_n",
+					"strict" : false
+				},
+				{
+					"name" : "CLK",
+					"strict" : false
+				},
+				{
+					"name" : "Rst_n",
+					"strict" : false
+				},
+				{
+					"name" : "echo",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

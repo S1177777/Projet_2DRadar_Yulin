@@ -1,0 +1,8 @@
+
+State Machine - |IPtelemetre|State
+Name State.Go4 State.Go3 State.Go2 State.Go1 State.Init 
+State.Init 0 0 0 0 0 
+State.Go1 0 0 0 1 1 
+State.Go2 0 0 1 0 1 
+State.Go3 0 1 0 0 1 
+State.Go4 1 0 0 0 1 

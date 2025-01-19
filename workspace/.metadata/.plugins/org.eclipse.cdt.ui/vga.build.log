@@ -1,0 +1,9 @@
+18:19:12 **** Incremental Build of configuration Nios II for project vga ****
+make all 
+Info: Building ../vga_bsp/
+D:/Quartus/quartus/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../vga_bsp/
+[BSP build complete]
+[vga build complete]
+
+18:19:13 Build Finished (took 767ms)
+

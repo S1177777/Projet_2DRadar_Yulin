@@ -1,0 +1,83 @@
+#include "system.h"
+#include "io.h"
+#include "altera_avalon_pio_regs.h"
+#include <stdio.h>
+#include <unistd.h>
+
+// 定义PWM信号的最小和最大时间（单位：时钟周期）
+#define PWM_MIN 50000   // 1ms -> 0°
+#define PWM_MAX 100000  // 2ms -> 90°
+#define MAX_ANGLE 90    // 最大角度
+#define STEP_ANGLE 10   // 每次旋转的角度步长
+#define MAX_DISTANCE_DIGITS 6 // 七段显示器支持的最大数字位数
+
+// 七段显示器段码表
+unsigned int seven_seg_code[] = {
+    0x3F, // 0
+    0x06, // 1
+    0x5B, // 2
+    0x4F, // 3
+    0x66, // 4
+    0x6D, // 5
+    0x7D, // 6
+    0x07, // 7
+    0x7F, // 8
+    0x6F  // 9
+};
+
+// 更新七段显示器的方法
+void update_seven_segment_display(unsigned int* display_buffer) {
+    // 更新 HEX3_HEX0 和 HEX5_HEX4 的值
+    IOWR_ALTERA_AVALON_PIO_DATA(HEX3_HEX0_BASE,
+        (display_buffer[2] << 24) | (display_buffer[3] << 16) |
+        (display_buffer[4] << 8) | display_buffer[5]);
+    IOWR_ALTERA_AVALON_PIO_DATA(HEX5_HEX4_BASE,
+        (display_buffer[0] << 8) | display_buffer[1]);
+}
+
+int main() {
+    unsigned int angle = 0;             // 当前角度
+    unsigned int measured_distance = 0; // 测距数据
+    unsigned int position;              // 转换后的伺服电机位置
+    unsigned int seven_seg_buffer[6] = {0}; // 用于七段显示的缓冲区
+
+    printf("Servo Motor and Distance Measurement Program Starting...\n");
+
+    while (1) {
+        // 将角度映射到伺服电机位置
+        position = (angle * 255) / MAX_ANGLE; // 将角度映射到8位值
+
+        // 将计算出的位置写入伺服电机控制IP核
+        IOWR_ALTERA_AVALON_PIO_DATA(SERVOMOTEUR_AVALON_0_BASE, position);
+
+        // 从测距仪读取数据
+        measured_distance = IORD_ALTERA_AVALON_PIO_DATA(TELEMETRE_0_BASE);
+
+        // 显示角度在前三个七段显示器
+        for (int i = 0; i < 3; i++) {
+            seven_seg_buffer[2 - i] = seven_seg_code[(angle/// / (1 << (4 * i))) % 10];
+        }
+
+        // 显示测距数据在后三个七段显示器
+        for (int i = 0; i < 3; i++) {
+            seven_seg_buffer[5 - i] = seven_seg_code[(measured_distance / (1 << (4 * i))) % 10];
+        }
+
+        // 更新七段显示器
+        update_seven_segment_display(seven_seg_buffer);
+
+        // 在控制台打印角度和测距
+        printf("%d° -> %d cm\n", angle, measured_distance);
+
+        // 增加角度
+        angle += STEP_ANGLE;
+        if (angle > MAX_ANGLE) {
+            angle = 0; // 复位到 0°
+        }
+
+        // 每次更新后延时 1 秒
+        usleep(1000000);
+    }
+
+    return 0;
+}
